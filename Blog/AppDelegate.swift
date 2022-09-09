@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  Blog
 //
-//  Created by Goopps on 08/09/22.
+//  Created by Bambang on 08/09/22.
 //
 
 import UIKit
