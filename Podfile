@@ -5,8 +5,7 @@ install! 'cocoapods', :deterministic_uuids => false
 target 'Blog' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-
-  # Pods for Goopps
+  
   pod 'Alamofire', '4.9.1'
   pod 'AlamofireImage', '~> 3.6'
   pod 'AlamofireNetworkActivityIndicator', '~> 2.4'
