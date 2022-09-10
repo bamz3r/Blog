@@ -10,9 +10,10 @@
 		2C36531FBE511216F9A56B79 /* Pods_Blog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17528C79F8D7BF2FED857CE0 /* Pods_Blog.framework */; };
 		AC477F1728C9E3AF008A5DAA /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC477F1628C9E3AF008A5DAA /* ArticleModel.swift */; };
 		AC477F2228C9E590008A5DAA /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC477F2128C9E590008A5DAA /* Config.swift */; };
-		AC477F2F28CA0D97008A5DAA /* CreateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC477F2E28CA0D97008A5DAA /* CreateController.swift */; };
 		AC477F3428CA14D6008A5DAA /* Extention UiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC477F3328CA14D6008A5DAA /* Extention UiView.swift */; };
 		AC477F4428CA1662008A5DAA /* ArticleDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC477F4328CA1662008A5DAA /* ArticleDetailVC.swift */; };
+		AC477F4928CB30A0008A5DAA /* ArticleEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC477F4828CB309F008A5DAA /* ArticleEditVC.swift */; };
+		AC477F4E28CB30C7008A5DAA /* ArticleCreateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC477F4D28CB30C7008A5DAA /* ArticleCreateVC.swift */; };
 		ACB7015628C9DADD00822B01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7015528C9DADD00822B01 /* AppDelegate.swift */; };
 		ACB7015828C9DADD00822B01 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7015728C9DADD00822B01 /* SceneDelegate.swift */; };
 		ACB7015A28C9DADD00822B01 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7015928C9DADD00822B01 /* ViewController.swift */; };
@@ -46,9 +47,10 @@
 		17528C79F8D7BF2FED857CE0 /* Pods_Blog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Blog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC477F1628C9E3AF008A5DAA /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
 		AC477F2128C9E590008A5DAA /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		AC477F2E28CA0D97008A5DAA /* CreateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateController.swift; sourceTree = "<group>"; };
 		AC477F3328CA14D6008A5DAA /* Extention UiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extention UiView.swift"; sourceTree = "<group>"; };
 		AC477F4328CA1662008A5DAA /* ArticleDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailVC.swift; sourceTree = "<group>"; };
+		AC477F4828CB309F008A5DAA /* ArticleEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleEditVC.swift; sourceTree = "<group>"; };
+		AC477F4D28CB30C7008A5DAA /* ArticleCreateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCreateVC.swift; sourceTree = "<group>"; };
 		ACB7015228C9DADD00822B01 /* Blog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACB7015528C9DADD00822B01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACB7015728C9DADD00822B01 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -145,10 +147,11 @@
 			children = (
 				ACB7015528C9DADD00822B01 /* AppDelegate.swift */,
 				ACB7015728C9DADD00822B01 /* SceneDelegate.swift */,
-				AC477F2E28CA0D97008A5DAA /* CreateController.swift */,
 				ACB7015928C9DADD00822B01 /* ViewController.swift */,
 				AC477F2128C9E590008A5DAA /* Config.swift */,
 				AC477F4328CA1662008A5DAA /* ArticleDetailVC.swift */,
+				AC477F4828CB309F008A5DAA /* ArticleEditVC.swift */,
+				AC477F4D28CB30C7008A5DAA /* ArticleCreateVC.swift */,
 				AC477F3328CA14D6008A5DAA /* Extention UiView.swift */,
 				ACB7018828C9DB8400822B01 /* ApiCall.swift */,
 				AC477F1528C9E390008A5DAA /* Model */,
@@ -355,11 +358,12 @@
 				AC477F3428CA14D6008A5DAA /* Extention UiView.swift in Sources */,
 				ACB7015A28C9DADD00822B01 /* ViewController.swift in Sources */,
 				ACB7015628C9DADD00822B01 /* AppDelegate.swift in Sources */,
+				AC477F4928CB30A0008A5DAA /* ArticleEditVC.swift in Sources */,
+				AC477F4E28CB30C7008A5DAA /* ArticleCreateVC.swift in Sources */,
 				ACB7018928C9DB8400822B01 /* ApiCall.swift in Sources */,
 				ACB7015828C9DADD00822B01 /* SceneDelegate.swift in Sources */,
 				AC477F1728C9E3AF008A5DAA /* ArticleModel.swift in Sources */,
 				AC477F4428CA1662008A5DAA /* ArticleDetailVC.swift in Sources */,
-				AC477F2F28CA0D97008A5DAA /* CreateController.swift in Sources */,
 				AC477F2228C9E590008A5DAA /* Config.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

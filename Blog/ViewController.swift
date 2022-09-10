@@ -9,7 +9,9 @@ import UIKit
 import Alamofire
 import AlamofireImage
 
-class ViewController: UITableViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var btnAdd: UIBarButtonItem!
     
     var isLoading: Bool = false
     
@@ -30,6 +32,7 @@ class ViewController: UITableViewController {
         initNavBarItem()
         
         initRefreshControl()
+        btnAdd.action = #selector(addTapped)
         getArticles()
     }
     
@@ -49,12 +52,12 @@ class ViewController: UITableViewController {
         self.getArticles()
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         print("heightForRowAt tableView \(indexPath.row)")
         return 60
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("cellForRowAt tableView \(indexPath.row)")
         
         let item = self.items[indexPath.row]
@@ -64,15 +67,15 @@ class ViewController: UITableViewController {
         return cell
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.items.count
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        if (indexPath.row > 1) {
             print("didSelectRowAt tableList")
         performSegue(withIdentifier: "article_to_detail", sender: indexPath.row)
@@ -80,7 +83,7 @@ class ViewController: UITableViewController {
 //        }
     }
     
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == self.items.count-1 {
             if(self.totalPage > self.currenPage && !self.isLoading) {
               print("Begin next page")
@@ -94,25 +97,25 @@ class ViewController: UITableViewController {
         print("sender \(String(describing: sender))")
         if(segue.identifier == "article_to_detail") {
             let nav = segue.destination as! UINavigationController
-            let svc = nav.topViewController as! ArticleDetailVC
-            
-//            if let cell = sender as? ArticleCell
-//            {
-//                let indexPath = cell.tag
-                // use indexPath :D
-            svc.item_id = self.items[sender as! Int].id;
-            print("sender \(svc.item_id)")
+            if let svc = nav.topViewController as? ArticleDetailVC {
+                svc.item_id = self.items[sender as! Int].id;
+                svc.onBackHandler = {(senderVC) in
+                
+                    self.getArticles()
+                    senderVC.dismiss(animated: true, completion: nil)
+                }
+            }
 //            }
         } else if(segue.identifier == "article_to_create") {
             let nav = segue.destination as! UINavigationController
-            let svc = nav.topViewController as! ArticleDetailVC
-            
-            if let cell = sender as? ArticleCell
-            {
-                let indexPath = cell.tag
-                // use indexPath :D
-                svc.item_id = self.items[indexPath].id;
+            if let svc = nav.topViewController as? ArticleCreateVC {
+                svc.onBackHandler = {(senderVC) in
+                
+                    self.getArticles()
+                    senderVC.dismiss(animated: true, completion: nil)
+                }
             }
+            
         }
     }
     
@@ -157,10 +160,7 @@ class ViewController: UITableViewController {
     }
     
     func initNavBarItem() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backTapped))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icon_top_filter_white"), style: .plain, target: self, action: #selector(filterTapped))
-        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.white
-        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
         
     }
     
@@ -168,8 +168,8 @@ class ViewController: UITableViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @objc func filterTapped() {
-        performSegue(withIdentifier: "search_to_filter", sender: self)
+    @objc func addTapped() {
+        performSegue(withIdentifier: "article_to_create", sender: self)
     }
     
     override func didReceiveMemoryWarning() {
@@ -181,7 +181,7 @@ class ViewController: UITableViewController {
 
 func formatDate(strDate: String) -> String {
     let dateFormatter = DateFormatter()
-//    dateFormatter.dateStyle = .full
+    dateFormatter.dateFormat = "yyyy-MM-ddTHH:mm:ss.sZ"
     let date = dateFormatter.date(from: strDate) ?? Date()
     dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
     return dateFormatter.string(from: date)
@@ -201,7 +201,7 @@ class ArticleCell: UITableViewCell {
         labelTitle.text = cellItem.title
         labelTitle.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.bold)
 //        labelContent.text = cellItem.content
-        labelPublished.text = formatDate(strDate: cellItem.published_at)
+        labelPublished.text = cellItem.published_at//formatDate(strDate: cellItem.published_at)
 //        labelCreated.text = cellItem.created_at
 //        labelupdated.text = cellItem.updated_at
     }
